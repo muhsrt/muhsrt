@@ -1,0 +1,24 @@
+version: '2'
+services:
+  access-gateway:
+    image: duosecurity/access-gateway@sha256:5a6ee18892cea2ff39686cb796d603348b77c2d2f94881aaba3714b9d09dc42e
+    ports:
+    - "80:8000"
+    - "443:4443"
+    - "8443:8443"
+    container_name: access-gateway
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "20"
+    volumes:
+    - data:/data/
+    labels:
+      com.duo.access-gateway.builder.version: "e76d4ec18"
+      com.duo.access-gateway.code.version: "v2.0.0"
+      com.duo.access-gateway.built: "Mon, 17 Apr 2023 17:25:17 -0000"
+volumes:
+  data:
+    driver: local
